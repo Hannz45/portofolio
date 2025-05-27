@@ -2,39 +2,239 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Portfolio Saya</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Portofolio Muhammad Rehan - Desain Grafis, Web Development dan Blog pribadi." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
   <style>
+    /* ===== TYPOGRAPHY & BASE ===== */
     body {
-      transition: background-color 0.3s, color 0.3s;
+      font-family: 'Inter', sans-serif;
       background-color: white;
-      color: black;
+      color: #222;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0 20px 50px;
+      transition: background-color 0.3s, color 0.3s;
     }
-    .dark-mode {
-      background-color: #121212;
-      color: #f1f1f1;
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-top: 1.5em;
+      margin-bottom: 0.5em;
+      color: #111;
     }
-    .mode-toggle {
-      position: fixed;
-      bottom: 20px;    /* diubah dari top ke bottom */
+    p, li {
+      font-size: 1rem;
+      margin-bottom: 1em;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    a {
+      color: #0077cc;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    a:hover {
+      color: #005fa3;
+    }
+
+    /* ===== HEADER & NAV ===== */
+    header {
+      position: relative;
+      padding: 15px 0 60px;
+      border-bottom: 1px solid #ddd;
+    }
+    header h1 {
+      margin: 0 0 10px;
+      font-size: 2.2rem;
+      text-align: center;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      font-weight: 600;
+    }
+
+    /* HAMBURGER MENU BUTTON */
+    .menu-toggle {
+      display: none;
+      position: absolute;
+      top: 20px;
       right: 20px;
       font-size: 28px;
       background: none;
       border: none;
       cursor: pointer;
       user-select: none;
-      z-index: 1000;
+      color: #333;
+      z-index: 1001;
+    }
+
+    /* RESPONSIVE NAV MENU */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        position: fixed;
+        top: 65px;
+        right: 0;
+        background-color: #222;
+        width: 200px;
+        padding: 20px;
+        border-radius: 0 0 0 10px;
+        z-index: 1000;
+      }
+      nav.active {
+        display: flex;
+      }
+      nav a {
+        color: white;
+        padding: 10px 0;
+        border-bottom: 1px solid #444;
+      }
+      nav a:hover {
+        background-color: #444;
+      }
+      .menu-toggle {
+        display: block;
+      }
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 10px;
+    }
+    section#home img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 15px;
+    }
+
+    /* ===== FORM ===== */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 400px;
+      margin-top: 20px;
+    }
+    input, textarea, button {
+      font-family: inherit;
+      font-size: 1rem;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      resize: vertical;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #0077cc;
+      box-shadow: 0 0 5px #0077cc;
+    }
+    button {
+      background-color: #0077cc;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    #formMessage {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      text-align: center;
+      margin: 40px 0 20px;
+      color: #666;
+      font-size: 0.9rem;
+    }
+    footer .social-links {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    footer .social-links a {
+      color: #0077cc;
+      font-size: 1.5rem;
+      text-decoration: none;
+    }
+    footer .social-links a:hover {
+      color: #005fa3;
+    }
+
+    /* ===== DARK MODE ===== */
+    .dark-mode {
+      background-color: #121212;
+      color: #eee;
+    }
+    .dark-mode header, .dark-mode footer {
+      border-color: #333;
+      color: #ccc;
+    }
+    .dark-mode nav {
+      background-color: #222;
+    }
+    .dark-mode nav a {
+      color: #eee;
+    }
+    .dark-mode nav a:hover {
+      background-color: #444;
+    }
+    .dark-mode input, .dark-mode textarea {
+      background-color: #222;
+      color: #eee;
+      border-color: #444;
+    }
+    .dark-mode input:focus, .dark-mode textarea:focus {
+      border-color: #66aaff;
+      box-shadow: 0 0 5px #66aaff;
+    }
+    .dark-mode button {
+      background-color: #66aaff;
+      color: #222;
+    }
+    .dark-mode button:hover {
+      background-color: #5599dd;
+    }
+
+    /* ===== TOGGLE MODE BUTTON ===== */
+    .mode-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-size: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      user-select: none;
+      z-index: 1002;
+      color: #0077cc;
+      transition: color 0.3s;
+    }
+    .mode-toggle:hover {
+      color: #005fa3;
     }
   </style>
 </head>
 <body>
-  <!-- Tombol toggle mode di kanan bawah -->
+  <!-- TOGGLE MODE BUTTON -->
   <button id="toggleMode" class="mode-toggle" aria-label="Toggle light/dark mode">🌞</button>
 
   <header>
     <h1>WELCOME</h1>
-    <nav>
+    <button id="menuToggle" aria-label="Toggle menu" class="menu-toggle">☰</button>
+    <nav id="navMenu" class="nav-menu">
       <a href="#home">Beranda</a>
       <a href="#about">Tentang</a>
       <a href="#Hal Yang Menyenangkan">Hal Yang Menyenangkan</a>
@@ -46,7 +246,7 @@
   <section id="home">
     <h2>Halo, saya Rubi</h2>
     <p>Selamat datang di website portofolio saya.</p>
-    <img src="https://i.supa.codes/1CF9FL" alt="HYOO" />
+    <img loading="lazy" src="https://i.supa.codes/1CF9FL" alt="HYOO" />
   </section>
 
   <section id="about">
@@ -76,31 +276,36 @@
 
   <section id="contact">
     <h2>Kontak</h2>
-    <p>Email:muhammad.rehan5564@smk.belajar.id</p>
-    <p>Wa:6283119691902</p>
-    <p>Instagram:@rehan_hannz45</p>
-    <form>
-      <input type="text" placeholder="Nama" required />
-      <input type="email" placeholder="Email" required />
-      <textarea placeholder="Pesan" required></textarea>
+    <p>Email: muhammad.rehan5564@smk.belajar.id</p>
+    <p>Wa: 6283119691902</p>
+    <p>Instagram: @rehan_hannz45</p>
+    <form id="contactForm" novalidate>
+      <input type="text" name="name" placeholder="Nama" required />
+      <input type="email" name="email" placeholder="Email" required />
+      <textarea name="message" placeholder="Pesan" required></textarea>
       <button type="submit">Kirim</button>
+      <p id="formMessage"></p>
     </form>
   </section>
 
   <footer>
     <p>&copy; 2025 RuBi</p>
+    <div class="social-links">
+      <a href="https://github.com/hannz45" target="_blank" rel="noopener" aria-label="GitHub">🐙</a>
+      <a href="https://www.instagram.com/rehan_hannz45/" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+      <a href="https://wa.me/6283119691902" target="_blank" rel="noopener" aria-label="WhatsApp">📱</a>
+    </div>
   </footer>
 
   <script>
+    // Toggle light/dark mode with localStorage
     const toggleBtn = document.getElementById('toggleMode');
     const savedTheme = localStorage.getItem('theme');
 
-    // Atur tema saat halaman dimuat
     if(savedTheme === 'dark') {
       document.body.classList.add('dark-mode');
       toggleBtn.textContent = '🌙';
     } else {
-      document.body.classList.remove('dark-mode');
       toggleBtn.textContent = '🌞';
     }
 
@@ -114,6 +319,49 @@
         localStorage.setItem('theme', 'light');
       }
     });
-  </script>
-</body>
-</html>
+
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navMenu = document.getElementById('navMenu');
+    menuToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Smooth scroll on nav link click
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetSection = document.getElementById(targetId);
+        if(targetSection) {
+          window.scrollTo({
+            top: targetSection.offsetTop - 50,
+            behavior: 'smooth'
+          });
+        }
+        navMenu.classList.remove('active');
+      });
+    });
+
+    // Form submit handler with simple validation & feedback
+    const form = document.getElementById('contactForm');
+    const formMessage = document.getElementById('formMessage');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      const name = form.name.value.trim();
+      const email = form.email.value.trim();
+      const message = form.message.value.trim();
+
+      if(!name || !email || !message) {
+        formMessage.style.color = 'red';
+        formMessage.textContent = 'Mohon isi semua kolom dengan benar.';
+        return;
+      }
+
+      // Simulasi kirim (karena tanpa backend)
+      formMessage.style.color = 'green';
+      formMessage.textContent = 'Pesan berhasil dikirim! Terima kasih.';
+
+      //
